@@ -1,0 +1,10 @@
+<launch>
+  <arg name="user_name" />
+  <arg name="user_group" default="world" />
+
+  <log_info message="$(var user_name) in $(var user_group) [ROS-NS: $(var ros_namespace 'UNSPECIFIED')]" />
+
+  <!-- Helper launch file to debug scope -->
+  <log_warning message="Scope for $(eval '\'$(filename)\'.split(\'/\')[-1]')"/>
+  <include file="$(find-pkg-share isolated_launch_demo)/launch/print_scope.launch.py" />
+</launch>

@@ -1,0 +1,29 @@
+<launch>
+  <!-- Helper launch file to debug scope -->
+  <log_warning message="[1] Scope for $(eval '\'$(filename)\'.split(\'/\')[-1]')" />
+  <include file="$(find-pkg-share isolated_launch_demo)/launch/print_scope.launch.py" />
+
+  <let name="user_name" value="[MY NAME]" />
+  <let name="user_group" value="[MY GROUP]" />
+  
+  <!-- Helper launch file to debug scope -->
+  <log_warning message="[2] Scope for $(eval '\'$(filename)\'.split(\'/\')[-1]')"/>
+  <include file="$(find-pkg-share isolated_launch_demo)/launch/print_scope.launch.py" />
+
+  <!-- This is could be 'any internal context changing' action-->
+  <push-ros-namespace namespace="namespace"/>
+  
+  <!-- Helper launch file to debug scope -->
+  <log_warning message="[3] Scope for $(eval '\'$(filename)\'.split(\'/\')[-1]')"/>
+  <include file="$(find-pkg-share isolated_launch_demo)/launch/print_scope.launch.py" />
+
+  <group scoped="true" forwarding="false">
+    <include file="$(find-pkg-share isolated_launch_demo)/launch/inner_args_with_default.launch.xml">
+      <arg name="user_name" value="alice" />
+    </include>
+  </group>
+
+  <!-- Helper launch file to debug scope -->
+  <log_warning message="[4] Scope for $(eval '\'$(filename)\'.split(\'/\')[-1]')" />
+  <include file="$(find-pkg-share isolated_launch_demo)/launch/print_scope.launch.py" />
+</launch>
